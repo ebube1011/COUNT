@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>글자 수 확인기</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      height: 100vh;
+      background: #1e2235;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 4vh 1.5rem;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+    h1 {
+      font-size: clamp(18px, 2.5vh, 28px);
+      font-weight: 500;
+      color: #c8cde0;
+      margin-bottom: 2vh;
+      letter-spacing: 0.01em;
+    }
+    .card {
+      width: 100%;
+      max-width: 640px;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5vh;
+    }
+    textarea {
+      width: 100%;
+      height: 48vh;
+      resize: none;
+      font-size: clamp(14px, 1.8vh, 17px);
+      line-height: 1.75;
+      padding: 2vh 20px;
+      border: 1px solid #3a3f58;
+      border-radius: 16px;
+      background: #252a3d;
+      color: #dde1f0;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    textarea::placeholder { color: #555b7a; }
+    textarea:focus { border-color: #565e82; }
+    .bottom-row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    button {
+      font-size: clamp(14px, 1.8vh, 17px);
+      padding: 1vh 28px;
+      border-radius: 12px;
+      border: none;
+      background: #2e3450;
+      color: #c8cde0;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.12s;
+      white-space: nowrap;
+    }
+    button:hover { background: #363d5c; }
+    button:active { transform: scale(0.98); }
+    .results {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .result-item {
+      font-size: clamp(13px, 1.6vh, 15px);
+      color: #8890b0;
+      background: #252a3d;
+      border: 1px solid #3a3f58;
+      border-radius: 10px;
+      padding: 0.8vh 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .result-item span {
+      font-weight: 700;
+      color: #c47a3a;
+      font-size: clamp(14px, 1.8vh, 17px);
+    }
+    .hidden { display: none; }
+    .footer {
+      margin-top: 2vh;
+      font-size: clamp(10px, 1.3vh, 13px);
+      color: #454c6a;
+    }
+  </style>
+</head>
+<body>
+  <h1>글자 수 확인기</h1>
+  <div class="card">
+    <textarea id="input" placeholder="여기에 텍스트를 입력하세요..."></textarea>
+    <div class="bottom-row">
+      <button onclick="count()">글자 수 세기</button>
+      <div class="results hidden" id="results">
+        <div class="result-item">전체 글자 수 : <span id="total">0</span></div>
+        <div class="result-item">공백 미포함 : <span id="noSpace">0</span></div>
+        <div class="result-item">글자만 : <span id="onlyChar">0</span></div>
+      </div>
+    </div>
+  </div>
+  <p class="footer">이 웹사이트는 AI의 도움을 받아 제작되었습니다.</p>
+  <script>
+    function count() {
+      const text = document.getElementById('input').value;
+      const total = text.length;
+      const noSpace = text.replace(/\s/g, '').length;
+      const onlyChar = text.replace(/[^가-힣a-zA-Z0-9]/g, '').length;
+      document.getElementById('total').textContent = total;
+      document.getElementById('noSpace').textContent = noSpace;
+      document.getElementById('onlyChar').textContent = onlyChar;
+      document.getElementById('results').classList.remove('hidden');
+    }
+  </script>
+</body>
+</html>
